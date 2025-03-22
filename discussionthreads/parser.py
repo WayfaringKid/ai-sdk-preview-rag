@@ -32,15 +32,16 @@ def write_md_file(result_list, md_file):
             # strip question of newlines
             question = re.sub(r'\n', ' ', question)
             answers = elt[1]
-            f.write(f'# **Question {i}**: {question}\n\n')
+            
             j = 0
             if len(answers) == 0:
-                f.write('**No answers provided**\n')
-                f.write("\n\n")
+                #skip over
                 continue
+            f.write(f'# **Question {i}**: {question}\n\n')
             if len(answers) == 1:
                 f.write(f'**Answer**: {answers[0]}\n')
                 f.write("\n\n")
+                i += 1
                 continue
             for answer in answers:
                 f.write(f'**Answer {j}**: {answer}\n')
