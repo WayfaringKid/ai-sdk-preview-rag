@@ -1,0 +1,512 @@
+[
+  {
+    "question": "project_do we use the population formula or sample formula",
+    "answers": [
+      "sample formula"
+    ]
+  },
+  {
+    "question": "project_just curious as to how the autograder tells when we've tested a criteria. do we need to assert the condition, or cout the relevant return value, etc? thanks.",
+    "answers": [
+      "You should assert the conditions."
+    ]
+  },
+  {
+    "question": "project_Does the sort function order the values in the vector from the least to highest?",
+    "answers": [
+      "Yes, \n\nHere's the implementation from p1_library.cpp:\n\nvoid sort(std::vector<double> &v) {\n\n  std::sort(v.begin(), v.end());\n\n}"
+    ]
+  },
+  {
+    "question": "project_Where can I find the guidelines for the style?",
+    "answers": [
+      "No style checks for P1 but here's the style guide for future projects:\nhttps://eecs280staff.github.io/tutorials/style_guide.html"
+    ]
+  },
+  {
+    "question": "project_Do I have to use the modf() function for the percentile function?",
+    "answers": [
+      "While we don't explicitly check for its usage as long your output is correct, it does make it much easier to implement the function and avoids issues with your percentile being slightly off. Definitely recommend to use it "
+    ]
+  },
+  {
+    "question": "project_When I try to compile the test cases file by typing in \"make stats_test.exe\", this error message is popping up.",
+    "answers": [
+      "Make sure you're in the right directory under terminal\n\n"
+    ]
+  },
+  {
+    "question": "project_Do the test cases that we make get graded?",
+    "answers": [
+      "For this project we are only grading that they exist. For future projects they will be graded for how many instructor bugs they can catch.\nEither way, they are meant to help you double check your code for the private tests :)"
+    ]
+  },
+  {
+    "question": "project_Where can I find the project 1 scoring points setup? Like what is the total points for project 1 and how is it split up?",
+    "answers": [
+      "There are 24 points total, 9 points for the public tests (which you can see broken down on the AG) and 15 points for private test cases which are released after the deadline. We don't disclose the breakdown of private test cases.\n\n"
+    ]
+  },
+  {
+    "question": "project_When would the feedback and scores from the private tests for Project 1 be available?",
+    "answers": [
+      "Soon TM"
+    ]
+  },
+  {
+    "question": "project_Hi! For p2 on Autograder, I've been downloading my code from last semester and submitting it through Autograder, but I've been getting scores varying from 3/70 to 16/70? It's the exact same code that I used when I submitted to Autograder last semester, but before me and my project partner were getting 67/70 on our project? I'm a little confused about what might be off about the code that's resulting in the 3 or 16 /70.  I couldn't make it to the project overview today so I'm not sure if I missed something critical (?) like if the specs changed or not -- I've gone through the slides but I haven't seen anything so far (?)",
+    "answers": [
+      "Project 2 has changed from last semester as indicated in the specs:\n\nPlease make sure you are looking at the latest specs and files while working on the project."
+    ]
+  },
+  {
+    "question": "project_Hi,  I and my partner have written our implementation for Matrix_at() and we think we did it correctly, but we are struggling with writing test cases for it. We have looked at the FAQ where it mentions Matrix_at() and we have referenced lecture notes about pointers and how to use them when writing code for testing Matrix_at().   We seem to be having the most issues when we try to assign a value through a pointer we created using Matrix_at() (the non-constant function) and when we try to use that pointer when calling another function (Matrix_column) (however, we were able to use a pointer made with Matrix_at() when calling Matrix_column() in a separate test function). The code stops running at this point and the terminal says it is experiencing a segmentation fault, but I don't think we are accessing anything out of bounds. I'm struggling to find out if the issue is with some part of the test case I've written, Matrix_at(), or Matrix_column().  Sorry if I am being unclear, I am really lost on what the issue is, so I'm struggling to articulate the problems I've found. Do you know what the issue might be or what issues I should be looking for in our code?  The issue is appearing on Line 129 of Matrix_tests.cpp in our most recent submission to the autograder (the section that is not running is currently turned into a series of comments to allow the code to run without errors).  Thank you!",
+    "answers": [
+      "Based on the most recent AG submission it looks like in Matrix_at (and several other functions) you have mat->data.data(). To access the data array in a Matrix object, you just need mat->data, not mat->data.data(). I would also encourage you to use your debugger to step through your own tests or the public tests to ensure Matrix_at is where you are failing and that would also be able to give you more direct feedback on exactly where the bug is coming from!\n\n"
+    ]
+  },
+  {
+    "question": "project_the resources ive tried to find to have each of the two functions call a singular helper function which can output both a const and non-const pointer have mostly touched on doing so using \"const {\" which seems to be exclusive to member functions, at least according to the inlay diagnostic hints of my ide. is there any way to do this which is recommended? thank you !",
+    "answers": [
+      "I'm not staff, but I believe Prof. Juett talked about this in lecture on Wednesday or Thursday. If I remember correctly, this is the one example where we do need to duplicate code between the two functions.\n\nThat is what I've done, and my code still passes the autograder check for code duplication."
+    ]
+  },
+  {
+    "question": "project_Hello! I'm currently working on implementing seam_carve_width in processing.cpp , and I don't know how to initialize the seam array needed to call find_minimal_vertical_seam  and remove_vertical_seam .  Both the above functions require int seam[] to have at least length Matrix_width allocated to it, but since I can't know the width of an image at compile time, I keep getting the clang error:  clang: Variable length arrays are a C99 feature   My first thought was to define a constant variable for the height at the beginning of seam_carve_width, as that will always be greater than or equal to the height at the end. That didn't remove the first error, however, and I also got a new error:  clang: Initializer of 'height' is not a constant expression   While this makes sense, Image_height doesn't return a compile time constant, I don't know what to do to get a correctly initialized int seam[].  Do I just initialize it to some set max length, e.g. 1,000,000, or is there something I am missing, either in the instructions, the function requirements, or C++ syntax?  Thank you!",
+    "answers": [
+      "It's said somewhere to initialize seam[] as a vector and then pass through seam.data() for the data array. Double check with someone or the specs."
+    ]
+  },
+  {
+    "question": "project_Hi, I am wondering if the processing file passed the public test on my vs code but reports timed out issue for horses while passing the other two on autograder, is it because my code is inefficient and runs too slow?   Thank you!",
+    "answers": [
+      "yep- check to make sure there are no unnecessary loops in your code (ie. there should be no loops in matrix_at()). The perf command may also be helpful in identifying where the slowest parts of your program are if you have windows."
+    ]
+  },
+  {
+    "question": "project_For a 1x1 matrix would the vertical cost matrix be the same as the energy matrix?",
+    "answers": [
+      "the first row of cost = first row of energy. So yes."
+    ]
+  },
+  {
+    "question": "project_Hi,  My partner and I are struggling to get the 10/10 points for catching bugs with our Matrix_tests.cpp. We have continuously lost points and gained points seemingly at random.   We received 10/10 in this category on a submission made May 19th at about 7pm. After that, we removed one test within a larger test function that was getting a false positive according to the autograder (I know that I removed only the part that was getting a false positive because I stopped getting that message for later submissions without changing the other parts of that test function.) However, in spite of only making the changes that were causing their own issues, our score dropped to 2/10. Even if those 2-3 tests were catching autograder bugs, I don't understand how taking out those total 10 lines of code (including cout statements) could have made us lose 8 points on the autograder.  I have even submitted the same file twice (copy pasted the entire file from the autograder submission that got 10/10 -- only taking out the part that had previously received a false positive -- and resubmitted it today, May 20th at about 8:50pm, alongside my other, updated, files) and our score is still stuck at 2/10 for the Matrix_cpp.tests. There is only one unique aspect to the test cases that were causing false positives, so I reasonably think that that unique aspect must also be what the Autograder is giving us points for. However, I don't know how to continue submitting those test cases if they are giving us false positives.   Is there something I am missing? Why are we scoring so low on the autograder's tests for Matrix_tests.cpp after briefly scoring 10/10? Should we continue submitting files with test cases that are returning false positives just to get the Matrix_tests points? Will submitting files with false positives harm our score in the end?  Thank you",
+    "answers": [
+      "I would take a second look at the unit testing framework. I am not sure how you caught 10/10 bugs the first time around since you weren't using the assert statements needed to signal to the program that there was an issue in that submission. After looking at your test file there are some issues with the way you structure your tests. I submitted one of the files you submitted to the AG that got a 10/10 and got a 0/10 myself. So there is something strange going on.\n\nMy guess is, the only bugs you are catching in your latest submission are the ones in which the buggy instructor solution intentionally goes out of bounds, hence violating the RME and failing the assert statements inside the Matrix_at() function in Matrix.cpp, for example.\n\nWhat I would do is modify all your test cases to use ASSERT_TRUE(), ASSERT_EQUAL(), etc. like we require in the unit testing framework. This is the way you are supposed to catch bugs in this class. While print statements are useful for local testing, im pretty sure that the autograder is only checking for failures in the unit test framework. Could you try doing this, resubmitting, and then following up on this post?\n\n There are office hours tomorrow also if you need help with doing this :) we are happy to help!"
+    ]
+  },
+  {
+    "question": "project_I am running public tests on my processing.cpp file, and am getting this error. I tried using the debugger but am still not able to find what could be wrong. What could I do to figure it out?    \"Testing dog seam carve 4x5...zsh: segmentation fault ./processing_public_tests.exe\"",
+    "answers": [
+      "That error alone doesn't tell you (or I) much. a segfault is easiest to catch in the debugger because you can step up the stack frames in the debugger to figure out what line is causing it. Here's a guide if you haven't seen this already. If not, just come to office hours tomorrow and we will sort it out.\n\n"
+    ]
+  },
+  {
+    "question": "project_Are we not allowed to use loops for any of the functions in matrix.cpp?  For the matrix_print function how do I print the values without a for loop?",
+    "answers": [
+      "You should use loops where you think it's appropriate. And if you are still unsure, feel free to come to office hours some time today. "
+    ]
+  },
+  {
+    "question": "project_When I use \"endl\" in my code, it is saying the identifier endl is undefined. Im not sure how to fix this.",
+    "answers": [
+      "Did you include \"using namespace std\" at the top of your file? If you didn't, you can fix your error by either adding that line at the top of your file or replacing endl with std::endl\n\n"
+    ]
+  },
+  {
+    "question": "project_Is there an assert statement for this requires clause?",
+    "answers": [
+      "A general rule of thumb is to write assert statements for require clauses when possible.  However not all require clauses translate well into simple/straightforward assert statements. In those cases you can omit including an assert statement. "
+    ]
+  },
+  {
+    "question": "project_In Matrix_row and Matrix_column functions, does element mean the value or the index?  If it is value, what do we do if the matrix has that value more than once?",
+    "answers": [
+      "value. The matrix should work with duplicates as you can use pointer arithmetic to calculate the unique index. of the element, even if it is a duplicate"
+    ]
+  },
+  {
+    "question": "project_In the debugger, how can I know if a pointer variable is holding the right address?",
+    "answers": [
+      "I usually use watch variables. Navigate to the debug pane on the left side of the editor. Start debugging. You'll see a panel beneath the variables section called \"watch\". Here, you can press the + sign and type any expression you want to keep an eye on. if you want to check the value that ptr points to, you can do *ptr as your watch expression, which will give the value that the ptr points to (as long as your breakpoint is somewhere in scope of the variable). You shouldn't need to check the address of a pointer, as this is not managed by you so it should be correct. \n\n"
+    ]
+  },
+  {
+    "question": "project_Do p3 specs come out today or tomorrow?",
+    "answers": [
+      "Probably tomorrow"
+    ]
+  },
+  {
+    "question": "project_I just tried to submit to the autograder and am receiving this error and am unable to see the results of my submit. Is anyone else experiencing this? I am a little concerned considering the project is due tonight...",
+    "answers": [
+      "same here",
+      "We are aware of the issue and have informed the autograder team. We should have an update shortly."
+    ]
+  },
+  {
+    "question": "project_Do I have to use assert statements for these?",
+    "answers": [
+      "you don't have to write any assert statements in all of your code, technically. But if you wanted to write these it would look something like:\n\n\n// EDIT: dont do this\nassert(seam.size() == Image_height(img))\n...\n// inside your loop somewhere\nassert(seam[i] >= 0 && seam[i] < Image_width(img))\n\n\n\n\n\n"
+    ]
+  },
+  {
+    "question": "project_For the remove_verticle_seam function, after I make a copy of the image in a smaller matrix, do I resize the original matrix before I copy the image back into the original matrix? Or do I not resize the original matrix?",
+    "answers": [
+      "you should just be able to set the old image equal to the new image."
+    ]
+  },
+  {
+    "question": "project_Do I print both these error messages for any of the errors or do I print the error message that relates to the error?",
+    "answers": [
+      "for all errors, you will print the entire message, and then exit or return with a nonzero number."
+    ]
+  },
+  {
+    "question": "project_Are comments graded?",
+    "answers": [
+      "No you don't need to worry about comments"
+    ]
+  },
+  {
+    "question": "project_When I try to submit to the autogravder, it says the due date has passed, but I though the due date was moved to tomorrow?",
+    "answers": [
+      "I'm having the same issue!\n\n",
+      "I'm also having the same issue."
+    ]
+  },
+  {
+    "question": "project_What does .str() mean?",
+    "answers": [
+      ".str() converts a stringstream to a string to ensure we are using the same type in the ASSERT_EQUAL"
+    ]
+  },
+  {
+    "question": "project_Are there private test cases for style? Or is the style grade determined only from the autogravder we see right now?",
+    "answers": [
+      "There are no private style tests. The only ones are the oclint ones you can already see on the autograder.\u00a0"
+    ]
+  },
+  {
+    "question": "project_Hi, I'm trying to use wget to retrieve the starter files via the link on the specs, but for some reason, I'm getting this error? I've tried checking my connection to github (according to the version control tutorial) and I've had a look at this link (",
+    "answers": [
+      "You can paste the url in a browser (Chrome, Safari, or etc.) and download the files that way (via the browser) until you are able to get the wget command working. "
+    ]
+  },
+  {
+    "question": "project_for the implementation of card_less, does the rank of the led card matter? or is only the suit important? thanks!",
+    "answers": [
+      "realized im pretty sure it does, in case the led card is the left bower.",
+      "Yes, the rank matters when the rank is specifically a jack of the trump/next suit (R/L bower)"
+    ]
+  },
+  {
+    "question": "project_Since the ranks and suits of the cards are assigned to an enum data type, is it possible for me to directly access the number of the rank/suit of the card instead of the title? In the function is_face_or_ace, instead of having 4 conditions in the if statement checking if the rank of the card is either king/queen/jack/ace, if I can simply access the number that the rank is assigned to (eg \"JACK\" is assigned the value 9), I can implement a simple if(suit>=9) which would be faster. Is it also possible to do this the other way around, where I implement it like this: if(suit>=JACK) ? Please let me know which of the two methods is correct.  Also, do we have to implement the friend function(friend std::istream & operator>>(std::istream &is, Card &card);)?",
+    "answers": [
+      "either is correct, but i would use the second option since it is clearer.\u00a0\n\nFor your second question, yeah you do have to implement the >> operator for the card class.\u00a0"
+    ]
+  },
+  {
+    "question": "project_Suit Suit_next(Suit suit)  {   return static_cast<Suit>((suit + 2) % 4);  }  In this sample of code, I used static_cast to convert the integer answer of the operation to a suit/enum data type. If I don't use static_cast, then my function doesn't work. Is this because the enum data type of 'suit' is converted to an integer?",
+    "answers": [
+      "yep, the integer addition/ mod operation you do makes the expression evaluate to an int. then, you have to convert it back to Suit"
+    ]
+  },
+  {
+    "question": "project_Hi, I'm currently writing my Card.cpp and I'm not sure if I should put the operator overrides inside the private/ public/ or entirely outside of the card class. In Card.hpp I saw that there was a copy of the >> operator in private written as a friend function as an example (?) of a possible configuration so I did that with my functions in Card.cpp? I'm not sure if I'm on the right track with that",
+    "answers": [
+      "The operators should go outside of the class, like they are in the Card.hpp file"
+    ]
+  },
+  {
+    "question": "project_working on the human player and have found the excerpt on always ensuring the hand of a human player is sorted. is this also applicable to the simple player? if not, is it actively harmful to do so to the simple player (if the autograder would not accept sorted simple player hands as correct)? thanks!",
+    "answers": [
+      "you can sort the simple player's hand if you would like, if that makes it easier!"
+    ]
+  },
+  {
+    "question": "project_I am retaking this course but I am doing euchre with a different partner than last time, is it considered a violation of the Honor Code if I use parts of the code that I personally worked on within the euchre project last time for this time as well?",
+    "answers": [
+      "We don't consider it an honor code violation to reuse your own code, but we strongly encourage re-implementing the project from scratch this term. Especially if you're working with a new partner, it would take away from the opportunity to fully work on all parts of the project for them if you're starting with previous code."
+    ]
+  },
+  {
+    "question": "project_According to the implementation, the lowest card in a higher row should have a higher value than the highest card in a lower value. So does this mean (for example) that if I picked the king of spades, and the queen of aces, the king of spades would have the higher value?",
+    "answers": [
+      "Yes, any King will be higher value than any Queen (assuming you are not taking trump or led suit into account)."
+    ]
+  },
+  {
+    "question": "project_Is this a correct implementation of the ctor function that uses an input stream?  Should I instead create a new card variable and read into that instead of reading into card at the array index directly? My only suspicion is if this will cause a memory leak in my code.",
+    "answers": [
+      "This seems fine to me. You should not need to create a new dynamic card each time."
+    ]
+  },
+  {
+    "question": "project_Do we get hints for finding bugs for our own player tests?",
+    "answers": [
+      "No"
+    ]
+  },
+  {
+    "question": "project_For player.cpp, are we expected to create derived classes for the simple player and the human player? If so, should we be modifying the player.hpp file?",
+    "answers": [
+      "Yes, you will make derived classes but in the cpp file."
+    ]
+  },
+  {
+    "question": "project_I am confused about what this function is supposed to do. Is this just for the case of a Jack?",
+    "answers": [
+      "when we set a trump suit, the left bower becomes part of the trump suit. get_suit() without the trump parameter cannot say that the LB is of the trump suit because the card that becomes the LB is relative to what the trump suit is. to fix this, we defined two get_suit functions, one that just gets the literal suit on the card, and one that checks for a LB.\u00a0"
+    ]
+  },
+  {
+    "question": "project_",
+    "answers": [
+      "yes"
+    ]
+  },
+  {
+    "question": "project_What is lhs and rhs? Also how can they be the same card if all the cards are unique?",
+    "answers": [
+      "left-hand side and right-hand side when comparing the card. You wouldn't actually get the exact same card but that's just how you'll be comparing them.",
+      "lhs: left hand side and rhs: right hand side. These operators are just in general for any card, not just within the game of euchre.\n\u00a0Another reason would be that you need to implement == for test cases to verify the output your test produces is equal to the correct card.\u00a0"
+    ]
+  },
+  {
+    "question": "project_What does this format mean?",
+    "answers": [
+      "It creates a std::array of type Card  with size PACK_SIZE . It is named cards . \n\nThe statement above is more or less equivalent to doing:\n\nCard cards[PACK_SIZE];\n\nstd::array is basically the class version of a regular array in c++, which means it is an object, unlike a regular array in c++. The standard array (std::array) has iterators and member functions like any other container ADT.\nSee: https://en.cppreference.com/w/cpp/container/array\n\n(note: you have not learned about iterators yet in lecture as they are scheduled for June 10th. This is a p4 concept so you can revisit the last paragraph after you've covered it in lecture)\n\n"
+    ]
+  },
+  {
+    "question": "project_What is meant by dynamically allocated memory?",
+    "answers": [
+      "Memory that is allocated on the heap as opposed to the stack. Another way to put it is the player objects in the array are all created using dynamic memory (ie. the new keyword).  This content is in the course notes and in the lectures from today (5/30) and yesterday (5/29). Here are the course notes defining what dynamic memory is. \n\n"
+    ]
+  },
+  {
+    "question": "project_I was wondering if there is any way to see what cards each of the players have in their hand besides figuring it out from pack.in. Since there is no variable that stores the name or the hand in Player.hpp, the debugger can't show the name or the hand of any of the players and I was wondering how I can see/access those things in the debugger.",
+    "answers": [
+      "(If your simple and human player classes do not have a hand vector, you are doing something wrong.)\n\nThat being said, if it is specifically a problem because they are of Player type and not Simple/Human player type, have you tried creating a watch variable?\n\n#61 goes into detail on how to make a watch variable.\n\nI think you can just do:\n\nplayers[i]->hand,  and players[i]->name, etc as watch variables (change your vector of players name/ index variable as it matches in your code)\n\n"
+    ]
+  },
+  {
+    "question": "project_For the functions in the player class, how do we implement them without any variables like name? are we supposed to create our own private member variables?  Also, do the declarations of the simple and human player classes go in the hpp file and implementations of the functions in the cpp file? Or does the declaration also go in the cpp file?",
+    "answers": [
+      "do not modify the player.hpp file at all!!! all modifications go into the Player.cpp file. The AG does not read any hpp files for projects 1,2, or 3 so any work you put there will not be graded.\n\n\ndeclare member variables as you see fit within the derived classes, not the player class.\n\n\n"
+    ]
+  },
+  {
+    "question": "project_Are we supposed to include the assert statement and return nullptr into our code also?",
+    "answers": [
+      "The assert(false) statements are included so that the file is compilable without specific coding implementation. That is also the purpose of return nullptr  as well because the function expects a pointer to be returned. \n\nYou should delete the assert(false) and return nullptr once you ready to write your implementation for the function Player_factory()"
+    ]
+  },
+  {
+    "question": "project_I was in office hours, and the meeting got cut short, and I was wondering how to go about implementing these test cases for test_player_add_card, and test_player_add_and_discard. I want to be able to access the hand vector, but cannot given that it is private. Is there a way that you would recommend going about this? Attached are screenshots of both test functions so far.",
+    "answers": [
+      "A method you can use to check that that correct card got added to the player's hand is to call play_card() (after having called add_card()). You would compare the output from play_card() to the correct card the player should have played. \n\nFor example: \n\nalice->add_card(nine_hearts) \n\nASSERT_TRUE(alice->play_card() == nine_hearts)\n\n\nUltimately, you can use the play_card() function to double check that a player has the correct cards. "
+    ]
+  },
+  {
+    "question": "project_I am confused as to what this part is asking to do. Am I supposed to make an invariants function?",
+    "answers": [
+      "what do you mean by an \"invariants function\"?"
+    ]
+  },
+  {
+    "question": "project_Have I coded the function right? Essentially, if the pack is empty, then the next value is initialised to the index of the last card, plus one. So 23+1=24.    Code 1: bool Pack::empty() const  {   return (next == PACK_SIZE);  }",
+    "answers": [
+      "I would test the function to see if it works the way you intended it to work."
+    ]
+  },
+  {
+    "question": "project_So for this part, the specs say this: \"If a Human Player is the dealer and someone orders up during the first round of making, the Human Player will pick up the upcard and discard a card of their choice. \". So are we suppose to check if the human player is dealer and those conditions in player.cpp or that is the euchre.cpp part?",
+    "answers": [
+      "that logic would be in the euchre.cpp file.\u00a0"
+    ]
+  },
+  {
+    "question": "project_How do we determine the i in hand.erase(hand.begin() + i); if we don't know the position of the card in the hand vector?",
+    "answers": [
+      "the point of the add and discard, play and lead card function is to determine the position of the card to remove/play.\n\nsome tips: ensure your hand is always sorted by sorting when you add the card. \nThen when you are looping through your hand, keep track of the current index you want to remove.\u00a0"
+    ]
+  },
+  {
+    "question": "project_I created a string private member variable for the player's name for the simple player class in player.cpp. When I'm running my public tests. I'm getting a segmentation fault 11. I'm not sure why since the parameters for the base class and the derived class are matching.  My latest submission is on the Autograder. Thank you!",
+    "answers": [
+      "The player factory function in your code returns a nullptr. \n\nPlayer *Player_factory(const string &name, const string &strategy){\n       Player *pointer = nullptr;\n       return pointer;\n}\n\n\nWhen you try to dereference that nullptr in your test code, that causes a segmentation fault:\n\n Player * alice = Player_factory(\"Alice\", \"Simple\");\n ASSERT_EQUAL(\"Alice\", alice->get_name());\n"
+    ]
+  },
+  {
+    "question": "project_Not sure how to write the one that takes in the led card without copying code from the other.",
+    "answers": [
+      "you can call the first card_less in the second one! this should reduce code duplication"
+    ]
+  },
+  {
+    "question": "project_hey! i'm wrapping up the logic of euchre.cpp and am writing tests to ensure all components are working to help locate bugs. in submitting to the autograder i've found both that my pack's public tests seem to be failing despite working on my computer (WSL), and also that i am failing almost all of the UB checks with address sanitizer error output despite not encountering address sanitizer issues on my computer.  for pack: would it be helpful to run on caen?  for UB: would it help to place assert statements to check if the RME of a function is met?  any other advice would be appreciated. thanks!",
+    "answers": [
+      "ended up finding a lot more bugs and UB went away as i fixed them. probably the most straightforward thing that could have happened thankfully!"
+    ]
+  },
+  {
+    "question": "project_Should the operator overloads take into account both suit and rank or just rank?    bool operator<(const Card &lhs, const Card &rhs);  bool operator>(const Card &lhs, const Card &rhs);",
+    "answers": [
+      "It should account for both. If the ranks are equal, break ties by suit (does not consider Trump suit for operator overloads)."
+    ]
+  },
+  {
+    "question": "project_Isn't there a shuffle function is Pack.cpp? Why do we need another one? Also, what does play_hand function mean?",
+    "answers": [
+      "These are suggestions for functions you Game class could have. Your Game class could have a shuffle() function that handles all the shuffling aspects of the game, so probably just checking if shuffling is enabled and calling Pack::shuffle(). deal() and make_trump() would handle those phases of the game, and play_hand() probably handles playing an entire round. \n\nYou ideally want to split up functionality into functions like this and smaller because it organizes your code better, makes your code prettier, and probably makes debugging a lot easier. These were just suggestions for how you could do it, but anything that makes sense to you works too."
+    ]
+  },
+  {
+    "question": "project_How do I make sure in round 2 of making trump that the dealer makes trump if everyone else passes?",
+    "answers": [
+      "SimplePlayers should already do that, and HumanPlayers are assumed to follow all the rules. You aren\u2019t expected to handle a case where a HumanPlayer cheats or doesn\u2019t follow the screw the dealer rules. However, just so that way it doesn\u2019t do weird stuff in your own testing, I would place an assert(false) if somehow both rounds of making trump happen without the trump being made."
+    ]
+  },
+  {
+    "question": "project_For the tests for cards.cpp, do we have to test every single function including the operator overloading functions?",
+    "answers": [
+      "If you want to get all the points, testing every single function/operator is a good place to start (although it doesn't guarantee full points). If you haven't tested all of them and you don't have all the points, I definitely would test them\n\n"
+    ]
+  },
+  {
+    "question": "project_My debugger is launching, but it's exiting immediately with -1. I'm not sure why this is happening.",
+    "answers": [
+      "Are you setting a breakpoint at the very beginning of main when you run?"
+    ]
+  },
+  {
+    "question": "project_How do I empty each player's hand at the beginning of each round?",
+    "answers": [
+      "playing/leading cards should remove the card from the players hand. So assuming you did 5 tricks, at the end of each round you should have no cards remaining in the player\u2019s hands"
+    ]
+  },
+  {
+    "question": "project_Hi,  I made a few submits to the autograder today, and I made one submit shortly before the time the project was due. The most recent submission scored less on the public tests than the second-to-most recent submission. Will the most recent submission or the submission with the highest score on public tests be graded for my and my partner's final grade?  Thank you!",
+    "answers": [
+      "The submission with the highest score overall (including public and private tests) will be counted for your grade."
+    ]
+  },
+  {
+    "question": "project_For each hang of a game, do we reshuffle the cards, or keep it the way it is after the first time we shuffle it?",
+    "answers": [
+      "reshuffle the cards"
+    ]
+  },
+  {
+    "question": "project_For the euchre_test01.out.correct output. Why is the played card by Gabriel a Nine of Clubs, when she has a Diamonds card. Since, the led card is diamonds, shouldn't she also be playing diamonds?",
+    "answers": [
+      "The only diamond that Gabriel has is the Jack of Diamonds. Recall that trump is Hearts in this hand. Therefore, the left bower is the Jack of Diamonds. The left bower belongs to the suit of the trump suit. So in this case, the Jack of Diamonds that Gabriel has is actually considered a Heart.\n\n"
+    ]
+  },
+  {
+    "question": "project_When running the human output example. I am getting this segmentation fault but I am not sure what is causing this.",
+    "answers": [
+      "You'll have to step up the call stack in order to see where the segfault is happening. \n\nThe debugging guide goes more in depth on how to address these errors: https://eecs280staff.github.io/tutorials/debugging_guide.html#crash-in-my-code\n\n"
+    ]
+  },
+  {
+    "question": "project_In order to out put this I have tried to loop through the argv[] vector, but it is says it is undefined. Is this because I am using argv[] before the main function? Is there a way I can use arg[]?",
+    "answers": [
+      "You should just be using argv[] as a parameter in the main function. You can make member variables and functions in euchre.cpp if there are command line arguments you want to save to use elsewhere. Feel free to make a private post with screenshots of your code if there is something more specific you are referring to \n\n"
+    ]
+  },
+  {
+    "question": "project_Did the P4 overview session take place on Thursday as scheduled? I can't find the link for the recording or slides.",
+    "answers": [
+      "The recording will be posted today."
+    ]
+  },
+  {
+    "question": "project_Hi, I've been getting the red squiggly under #include <ncurses.h> and I'm not sure how to fix it? I searched it up online and a source said to try curses.h bc it's more portable or something but that didn't work either...",
+    "answers": [
+      "also if you haven't run \n\n\nbrew install ncurses\n\n\non MacOS, or\n\nsudo apt install libncurses5-dev\n\n\non Windows, you may need to run that. This is used specifically for interactive testing of the text editor."
+    ]
+  },
+  {
+    "question": "project_When will the Project 4 overview be posted?",
+    "answers": [
+      "It is posted."
+    ]
+  },
+  {
+    "question": "project_If a cursor is equivalent to a past-the-end iterator, would it be pointing at the last node or would it be equivalent to a '\\n' node?  In this image, would the end pointer's final (row, column) be (2,5) or would it be (2,4)?  Also in the case of an empty data where both first and last are nullptrs, would the cursor be located at (1,0)?",
+    "answers": [
+      "1. The cursor would be pointing to neither. Since it is past-the-end, there is nothing defined there.\n\n2. (2,5)\n\n3. yes\n\n\n\n"
+    ]
+  },
+  {
+    "question": "project_I am failing 2 of my public test cases for list.hpp by an off-by-one error. I am not sure why because I am passing my test cases, and the failing has to do with where I increment the element size. When I change the placement of where I increment the element size, it affects if I pass my own test cases or the public test cases. Please help my latest submission is on the autograder.",
+    "answers": [
+      "resolved in OH\nFor others running into an issue with the public tests, make sure your end iterator function properly returns an iterator pointing \"past-the-end\" (not to last)"
+    ]
+  },
+  {
+    "question": "project_Hi! I was just wondering how I can go about trying to code the compute_column() function without using any of the other functions we made and not using the \"row\" and \"column\" variables. Thank you!",
+    "answers": [
+      "How do you know when a new row starts? Is there a character you can look for that indicates the beginning of a new row? \n\nWith that in mind, think about how you can use a loop to \"count\" the number of columns until hitting the start of the current row/end of the previous row."
+    ]
+  },
+  {
+    "question": "project_I'm not sure why it won't let me do the self-assignment to check for list bug #2, this is the error that comes up on my terminal. Could anyone help me with this?",
+    "answers": [
+      "The compiler will not let you use self assignment directly. But you can \"trick\" the compiler into doing self assignment by doing the self assignment indirectly.\nYou might use a pointer, reference, etc to accomplish this."
+    ]
+  },
+  {
+    "question": "project_Hello! Currently, I'm passing all the public test cases for TextBuffer, but failing both of the line tests. I was wondering how to approach debugging, would it be similar to debugging a normal test case? I'm just confused because it's interactive. Thank you!",
+    "answers": [
+      "really late, but you can use \"make test\" to output it into the two files:\n\nline_test1.out and line_test2.out\n\ncompare those files with the line_test1.out.correct and line_test2.out.correct on https://www.diffchecker.com/text-compare/ \n\nyou can see pretty well the line where the you had any errors. good luck!"
+    ]
+  },
+  {
+    "question": "project_The following image is the terminal output after I run the leaks program on Tests_lines.exe. I'm having trouble identifying where the memory is leaking in my implementation or tests. My implementation for push_back is also attached. Any help/recommendations for identifying the problem would be appreciated. Thanks.",
+    "answers": [
+      "Didn't quiet get a solution, but I no longer have any leaks in memory after removing two insert tests which contained the following code:\n\nList<int>::Iterator it = list.begin();\n ++it; \n\n\n"
+    ]
+  },
+  {
+    "question": "project_Why am I getting compilation errors when I try to make after implementing bst.h? The errors seem to come from the map compile tests and map tests yet I haven't even touched map. The errors also mention a pair yet I haven't used a pair. Is this because I haven't implemented the map files yet?  My uniqname is tweinsto. I just submitted to the AG.",
+    "answers": [
+      "simply typing \u201cmake\u201d will run all public tests in the starter files. you ran map compile check, which won\u2019t compile until after you implement map.hpp"
+    ]
+  },
+  {
+    "question": "project_I'm getting a segmentation fault when I try to run my public tests for the BST.hpp. I tried debugging it using the debugger, but I'm really not understanding what the debugger is trying to say. I am attaching the screenshot of the message I'm getting from my debugger. My latest submission is on the autograder. Please help!",
+    "answers": [
+      "The issue is probably because you are trying to compare the datums with ==, <, > instead of the provided comparator, less. You can't compare the datums with ==, <, >, etc because you have no way of knowing if these operators are defined for the specific data type (since the tree is templated)",
+      "Thank You! I figured it out. The problem was with my check_sorting_invariant function. I was de-referencing the left and right nodes without checking if they are null pointers if anyone runs into the same issue."
+    ]
+  },
+  {
+    "question": "project_the spec contains the following code describing how to find and print elements of a map:  auto found_it = words.find(\"pi\"); if (found_it != words.end()) {   const auto &word = (*found_it).first; //key   auto number = (*found_it).second; //value   cout << \"found \" << word << \" \" << number << endl; }  on lines 3 and 4, would \"found_it->first\" and \"found_it->second\" work identically to \"(*found_it).first\" and \"(*found_it).second\"? thanks!",
+    "answers": [
+      "yes"
+    ]
+  },
+  {
+    "question": "project_the starter files contain the following code for the interface of insert:  Iterator insert(const T &item) {     assert(find(item) == end());     root = insert_impl(root, item, less);     return find(item); }  as root is set to the new element, in testing functions like max it seems impossible to find the max of the entire tree as root is set to point to a subtree, making the greater tree inaccessible. using to_string after inserts will show a tree which is empty except for the inserted element. how can i get around this? i figure i'm probably misunderstanding something so any explanation is appreciated. thanks!",
+    "answers": [
+      "never mind, you return the original node if the tree wasn't empty lol."
+    ]
+  },
+  {
+    "question": "project_What does 1-5 matches mean?",
+    "answers": [
+      "I think it's talking about how long a test suit should take to run in seconds.",
+      "I believe it's configured that way because you can technically have more test files (other classes like 370 do this), but we only use one file for the autograder. Just submit one BinarySearchTree_tests.cpp file.\n\n"
+    ]
+  },
+  {
+    "question": "project_When using the --debug flag, the values printed must be in alphabetical order. What is the best alphabetize the values? Is there a built-in/provided function I'm not thinking of?",
+    "answers": [
+      "I would suggest looking up how the elements are ordered when using iterators to iterate through std::map and std::set."
+    ]
+  }
+]
