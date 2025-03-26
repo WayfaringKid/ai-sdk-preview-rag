@@ -3,16 +3,25 @@ import re
 import sys
 import json
 
+def is_plain_text(entry):
+    '''Returns True if document has no images or attachments'''
+    doc = entry.get('document', '').lower()
+    return not any(tag in doc for tag in ['<img', '<image', 'href=', 'attachment'])
+
 def get_question_and_answers(json_file):
-    '''returns a list of dictionaries with project-prefixed question and list of answers'''
+    '''returns a list of plain-text Project 3 questions and their answers'''
     result = []
     with open(json_file) as f:
         data = json.load(f)
-        for key in data:
-            if key['type'] == 'question' and key['category'].startswith("Project"):
-                question = re.sub(r'\n', ' ', key['text']).strip()
-                answers = [ans['text'] for ans in key.get('answers', [])]
-                if answers:
+        for entry in data:
+            if (
+                entry.get('type') == 'question' and
+                entry.get('category', '').startswith("Project 3") and
+                is_plain_text(entry)
+            ):
+                question = re.sub(r'\n', ' ', entry.get('text', '')).strip()
+                answers = [ans.get('text', '').strip() for ans in entry.get('answers', []) if ans.get('text')]
+                if question and answers:
                     result.append({
                         "question": f"project_{question}",
                         "answers": answers
@@ -32,9 +41,10 @@ def main():
         if not json_file.endswith('.json'):
             continue
         result_list = get_question_and_answers(json_file)
-        out_file = re.sub(r'\.json$', '_parsed.json', json_file)
-        write_json_file(result_list, out_file)
-        print(f'Wrote {out_file}')
+        if result_list:
+            out_file = re.sub(r'\.json$', '_project3_plaintext_parsed.json', json_file)
+            write_json_file(result_list, out_file)
+            print(f'Wrote {out_file}')
 
 if __name__ == '__main__':
     main()

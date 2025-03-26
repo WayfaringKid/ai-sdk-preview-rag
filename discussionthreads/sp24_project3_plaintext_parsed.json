@@ -1,0 +1,141 @@
+[
+  {
+    "question": "project_Do p3 specs come out today or tomorrow?",
+    "answers": [
+      "Probably tomorrow"
+    ]
+  },
+  {
+    "question": "project_for the implementation of card_less, does the rank of the led card matter? or is only the suit important? thanks!",
+    "answers": [
+      "realized im pretty sure it does, in case the led card is the left bower.",
+      "Yes, the rank matters when the rank is specifically a jack of the trump/next suit (R/L bower)"
+    ]
+  },
+  {
+    "question": "project_Since the ranks and suits of the cards are assigned to an enum data type, is it possible for me to directly access the number of the rank/suit of the card instead of the title? In the function is_face_or_ace, instead of having 4 conditions in the if statement checking if the rank of the card is either king/queen/jack/ace, if I can simply access the number that the rank is assigned to (eg \"JACK\" is assigned the value 9), I can implement a simple if(suit>=9) which would be faster. Is it also possible to do this the other way around, where I implement it like this: if(suit>=JACK) ? Please let me know which of the two methods is correct.  Also, do we have to implement the friend function(friend std::istream & operator>>(std::istream &is, Card &card);)?",
+    "answers": [
+      "either is correct, but i would use the second option since it is clearer.\u00a0\n\nFor your second question, yeah you do have to implement the >> operator for the card class."
+    ]
+  },
+  {
+    "question": "project_Suit Suit_next(Suit suit)  {   return static_cast<Suit>((suit + 2) % 4);  }  In this sample of code, I used static_cast to convert the integer answer of the operation to a suit/enum data type. If I don't use static_cast, then my function doesn't work. Is this because the enum data type of 'suit' is converted to an integer?",
+    "answers": [
+      "yep, the integer addition/ mod operation you do makes the expression evaluate to an int. then, you have to convert it back to Suit"
+    ]
+  },
+  {
+    "question": "project_Hi, I'm currently writing my Card.cpp and I'm not sure if I should put the operator overrides inside the private/ public/ or entirely outside of the card class. In Card.hpp I saw that there was a copy of the >> operator in private written as a friend function as an example (?) of a possible configuration so I did that with my functions in Card.cpp? I'm not sure if I'm on the right track with that",
+    "answers": [
+      "The operators should go outside of the class, like they are in the Card.hpp file"
+    ]
+  },
+  {
+    "question": "project_working on the human player and have found the excerpt on always ensuring the hand of a human player is sorted. is this also applicable to the simple player? if not, is it actively harmful to do so to the simple player (if the autograder would not accept sorted simple player hands as correct)? thanks!",
+    "answers": [
+      "you can sort the simple player's hand if you would like, if that makes it easier!"
+    ]
+  },
+  {
+    "question": "project_I am retaking this course but I am doing euchre with a different partner than last time, is it considered a violation of the Honor Code if I use parts of the code that I personally worked on within the euchre project last time for this time as well?",
+    "answers": [
+      "We don't consider it an honor code violation to reuse your own code, but we strongly encourage re-implementing the project from scratch this term. Especially if you're working with a new partner, it would take away from the opportunity to fully work on all parts of the project for them if you're starting with previous code."
+    ]
+  },
+  {
+    "question": "project_Do we get hints for finding bugs for our own player tests?",
+    "answers": [
+      "No"
+    ]
+  },
+  {
+    "question": "project_For player.cpp, are we expected to create derived classes for the simple player and the human player? If so, should we be modifying the player.hpp file?",
+    "answers": [
+      "Yes, you will make derived classes but in the cpp file."
+    ]
+  },
+  {
+    "question": "project_I was wondering if there is any way to see what cards each of the players have in their hand besides figuring it out from pack.in. Since there is no variable that stores the name or the hand in Player.hpp, the debugger can't show the name or the hand of any of the players and I was wondering how I can see/access those things in the debugger.",
+    "answers": [
+      "(If your simple and human player classes do not have a hand vector, you are doing something wrong.)\n\nThat being said, if it is specifically a problem because they are of Player type and not Simple/Human player type, have you tried creating a watch variable?\n\n#61 goes into detail on how to make a watch variable.\n\nI think you can just do:\n\nplayers[i]->hand,  and players[i]->name, etc as watch variables (change your vector of players name/ index variable as it matches in your code)"
+    ]
+  },
+  {
+    "question": "project_For the functions in the player class, how do we implement them without any variables like name? are we supposed to create our own private member variables?  Also, do the declarations of the simple and human player classes go in the hpp file and implementations of the functions in the cpp file? Or does the declaration also go in the cpp file?",
+    "answers": [
+      "do not modify the player.hpp file at all!!! all modifications go into the Player.cpp file. The AG does not read any hpp files for projects 1,2, or 3 so any work you put there will not be graded.\n\n\ndeclare member variables as you see fit within the derived classes, not the player class."
+    ]
+  },
+  {
+    "question": "project_I am confused as to what this part is asking to do. Am I supposed to make an invariants function?",
+    "answers": [
+      "what do you mean by an \"invariants function\"?"
+    ]
+  },
+  {
+    "question": "project_Have I coded the function right? Essentially, if the pack is empty, then the next value is initialised to the index of the last card, plus one. So 23+1=24.    Code 1: bool Pack::empty() const  {   return (next == PACK_SIZE);  }",
+    "answers": [
+      "I would test the function to see if it works the way you intended it to work."
+    ]
+  },
+  {
+    "question": "project_So for this part, the specs say this: \"If a Human Player is the dealer and someone orders up during the first round of making, the Human Player will pick up the upcard and discard a card of their choice. \". So are we suppose to check if the human player is dealer and those conditions in player.cpp or that is the euchre.cpp part?",
+    "answers": [
+      "that logic would be in the euchre.cpp file."
+    ]
+  },
+  {
+    "question": "project_I created a string private member variable for the player's name for the simple player class in player.cpp. When I'm running my public tests. I'm getting a segmentation fault 11. I'm not sure why since the parameters for the base class and the derived class are matching.  My latest submission is on the Autograder. Thank you!",
+    "answers": [
+      "The player factory function in your code returns a nullptr. \n\nPlayer *Player_factory(const string &name, const string &strategy){\n       Player *pointer = nullptr;\n       return pointer;\n}\n\n\nWhen you try to dereference that nullptr in your test code, that causes a segmentation fault:\n\n Player * alice = Player_factory(\"Alice\", \"Simple\");\n ASSERT_EQUAL(\"Alice\", alice->get_name());"
+    ]
+  },
+  {
+    "question": "project_Not sure how to write the one that takes in the led card without copying code from the other.",
+    "answers": [
+      "you can call the first card_less in the second one! this should reduce code duplication"
+    ]
+  },
+  {
+    "question": "project_hey! i'm wrapping up the logic of euchre.cpp and am writing tests to ensure all components are working to help locate bugs. in submitting to the autograder i've found both that my pack's public tests seem to be failing despite working on my computer (WSL), and also that i am failing almost all of the UB checks with address sanitizer error output despite not encountering address sanitizer issues on my computer.  for pack: would it be helpful to run on caen?  for UB: would it help to place assert statements to check if the RME of a function is met?  any other advice would be appreciated. thanks!",
+    "answers": [
+      "ended up finding a lot more bugs and UB went away as i fixed them. probably the most straightforward thing that could have happened thankfully!"
+    ]
+  },
+  {
+    "question": "project_Should the operator overloads take into account both suit and rank or just rank?    bool operator<(const Card &lhs, const Card &rhs);  bool operator>(const Card &lhs, const Card &rhs);",
+    "answers": [
+      "It should account for both. If the ranks are equal, break ties by suit (does not consider Trump suit for operator overloads)."
+    ]
+  },
+  {
+    "question": "project_How do I make sure in round 2 of making trump that the dealer makes trump if everyone else passes?",
+    "answers": [
+      "SimplePlayers should already do that, and HumanPlayers are assumed to follow all the rules. You aren\u2019t expected to handle a case where a HumanPlayer cheats or doesn\u2019t follow the screw the dealer rules. However, just so that way it doesn\u2019t do weird stuff in your own testing, I would place an assert(false) if somehow both rounds of making trump happen without the trump being made."
+    ]
+  },
+  {
+    "question": "project_For the tests for cards.cpp, do we have to test every single function including the operator overloading functions?",
+    "answers": [
+      "If you want to get all the points, testing every single function/operator is a good place to start (although it doesn't guarantee full points). If you haven't tested all of them and you don't have all the points, I definitely would test them"
+    ]
+  },
+  {
+    "question": "project_How do I empty each player's hand at the beginning of each round?",
+    "answers": [
+      "playing/leading cards should remove the card from the players hand. So assuming you did 5 tricks, at the end of each round you should have no cards remaining in the player\u2019s hands"
+    ]
+  },
+  {
+    "question": "project_Hi,  I made a few submits to the autograder today, and I made one submit shortly before the time the project was due. The most recent submission scored less on the public tests than the second-to-most recent submission. Will the most recent submission or the submission with the highest score on public tests be graded for my and my partner's final grade?  Thank you!",
+    "answers": [
+      "The submission with the highest score overall (including public and private tests) will be counted for your grade."
+    ]
+  },
+  {
+    "question": "project_For each hang of a game, do we reshuffle the cards, or keep it the way it is after the first time we shuffle it?",
+    "answers": [
+      "reshuffle the cards"
+    ]
+  }
+]
