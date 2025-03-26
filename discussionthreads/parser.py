@@ -1,8 +1,6 @@
-''' Gets the question and answer from the discussion thread .json file and prints them nicely in a new md file. '''
 import os
 import re
 import sys
-
 import json
 
 def get_question_and_answers(json_file):
@@ -11,11 +9,11 @@ def get_question_and_answers(json_file):
     with open(json_file) as f:
         data = json.load(f)
         for key in data:
-            if key['type'] == 'question':
+            # Only continue if 'type' is 'question' AND 'category' starts with "Project"
+            if key['type'] == 'question' and key['category'].startswith("Project"):
                 question = key['text']
                 answers = key['answers']
-
-        # answers is a list of other json objects
+                # answers is a list of other json objects
                 answer_list = []
                 for key1 in answers:
                     answer = key1['text']
@@ -24,7 +22,7 @@ def get_question_and_answers(json_file):
     return result
 
 def write_md_file(result_list, md_file):
-    '''writes the question and answer to a markdown file'''
+    '''writes the question and answers to a markdown file'''
     with open(md_file, 'w') as f:
         i = 0
         for elt in result_list:
@@ -35,7 +33,7 @@ def write_md_file(result_list, md_file):
             
             j = 0
             if len(answers) == 0:
-                #skip over
+                # skip over
                 continue
             f.write(f'# **Question {i}**: {question}\n\n')
             if len(answers) == 1:
@@ -49,12 +47,11 @@ def write_md_file(result_list, md_file):
             f.write("\n\n")
             i += 1
 
-
 def main():
     if len(sys.argv) != 1:
         print('Usage: python3 parser.py')
         sys.exit(1)
-    # convert any json files from inside the current directory to a markdown file
+    # Convert any json files from inside the current directory to a markdown file
     for json_file in os.listdir('.'):
         if not json_file.endswith('.json'):
             continue
