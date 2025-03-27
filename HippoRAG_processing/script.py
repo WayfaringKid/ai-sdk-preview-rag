@@ -5,14 +5,14 @@ import json
 import multiprocessing
 
 def main():
-    # 在 main 内部再导入 HippoRAG，避免模块顶层就触发多进程创建
+    # 在 main 内部导入 HippoRAG，避免在模块顶层启动多进程引发冲突
     from hipporag import HippoRAG
 
     # 假设当前脚本与 "projectspecs"、"discussionthreads" 文件夹同级
     markdown_dir = os.path.join(os.path.dirname(__file__), '..', 'projectspecs')
     query_dir = os.path.join(os.path.dirname(__file__), '..', 'discussionthreads')
 
-    # 1) 读取 docs
+    # 1) 读取 docs (来自 .md 文件)
     docs = []
     markdown_files = glob.glob(os.path.join(markdown_dir, "*.md"))
     for md_file in markdown_files:
@@ -22,13 +22,13 @@ def main():
 
     print("=== Docs loaded from 'projectspecs' ===")
     for i, doc in enumerate(docs):
-        snippet = doc[:100].replace("\n", "\\n")
+        snippet = doc[:100].replace("\n", "\\n")  # 仅打印前100字符
         print(f"Doc[{i}] {snippet}...")
 
     # 2) 初始化 HippoRAG
     save_dir = 'outputs'
-    llm_model_name = 'gpt-4o-mini'        # 如要真实连接OpenAI，请改成 'gpt-3.5-turbo' 或 'gpt-4'
-    embedding_model_name = 'nvidia/NV-Embed-v2'
+    llm_model_name = 'gpt-4o-mini'       # 若要连OpenAI实际模型，可改 'gpt-3.5-turbo' 等
+    embedding_model_name = 'facebook/contriever'
 
     hipporag = HippoRAG(
         save_dir=save_dir, 
@@ -39,12 +39,12 @@ def main():
     # 3) 对 docs 进行索引
     hipporag.index(docs=docs)
 
-    # 4) 读取 queries（以 sp24_parsed.json 为例）
+    # 4) 读取 queries（假设文件名为 sp24_parsed.json）
     queries = []
     json_query_file = os.path.join(query_dir, "sp24_parsed.json")
     if os.path.isfile(json_query_file):
         with open(json_query_file, "r", encoding="utf-8") as f:
-            data = json.load(f)  # 假设 data 是一个列表
+            data = json.load(f)  # data 应该是一个列表，每个元素带 "question" 字段
             for item in data:
                 q = item.get("question", "").strip()
                 if q:
@@ -57,41 +57,37 @@ def main():
         snippet = q.replace("\n", "\\n")
         print(f"Q[{i}]: {snippet}")
 
-    # 5) 真跑检索&问答
-    retrieval_results = hipporag.retrieve(queries=queries, num_to_retrieve=2)
-    qa_results = hipporag.rag_qa(retrieval_results)
-    print("=== QA Results (retrieval + QA) ===")
-    for i, ans in enumerate(qa_results):
-        print(f"Question: {queries[i]}")
-        print(f"Answer:   {ans}")
-        print("----")
-
-    # 一步到位 RAG QA
+    # 5) 一步到位 RAG QA
+    #    (HippoRAG 会内部执行检索 + 生成答案)
     rag_results = hipporag.rag_qa(queries=queries)
     print("=== RAG QA (One step) ===")
-    for i, ans in enumerate(rag_results):
-        print(f"Question: {queries[i]}")
-        print(f"Answer:   {ans}")
+
+    for ans in rag_results:
+        print(f"Question: {ans.question}")
+        print(f"Answer:   {ans.answer}")
         print("----")
 
-    # 6) 把 Q&A 结果写入到 JSON 文件
-    q_and_a_list = []
-    for i, ans in enumerate(rag_results):
+    clean_list = []
+    for sol in rag_results:
+        # sol 是一个 QuerySolution 实例
+        # question 放在 sol.question
+        # answer 放在 sol.answer
+        # docs 里是大段检索上下文
+
         entry = {
-            "question": queries[i],
-            "answer": ans
+            "question": sol.question,
+            "answer": sol.answer  # 只要简洁答案, 不要整片 docs
         }
-        q_and_a_list.append(entry)
+        clean_list.append(entry)
 
-    output_path = "qa_results.json"
-    with open(output_path, "w", encoding="utf-8") as f:
-        json.dump(q_and_a_list, f, ensure_ascii=False, indent=2)
+    # 写入 JSON
+    with open("qa_results.json", "w", encoding="utf-8") as f:
+        json.dump(clean_list, f, ensure_ascii=False, indent=2)
 
-    print(f"[*] Q&A results saved to {output_path}")
-
+    print("[*] Done, see qa_results.json")
 
 if __name__ == "__main__":
-    # 对于macOS下多进程，可以用 'fork' 替代 'spawn'，避免冲突
+    # macOS 下把多进程启动方式改为 'fork'，避免 spawn 冲突
     multiprocessing.set_start_method("fork", force=True)
 
     main()
