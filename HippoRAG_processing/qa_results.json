@@ -1,0 +1,94 @@
+[
+  {
+    "question": "project_Do p3 specs come out today or tomorrow?",
+    "answer": "The text does not specify the current date, so I cannot determine if the specs come out today or tomorrow."
+  },
+  {
+    "question": "project_for the implementation of card_less, does the rank of the led card matter? or is only the suit important? thanks!",
+    "answer": "Yes, both the suit and rank of the led card matter for the implementation of `card_less`."
+  },
+  {
+    "question": "project_Since the ranks and suits of the cards are assigned to an enum data type, is it possible for me to directly access the number of the rank/suit of the card instead of the title? In the function is_face_or_ace, instead of having 4 conditions in the if statement checking if the rank of the card is either king/queen/jack/ace, if I can simply access the number that the rank is assigned to (eg \"JACK\" is assigned the value 9), I can implement a simple if(suit>=9) which would be faster. Is it also possible to do this the other way around, where I implement it like this: if(suit>=JACK) ? Please let me know which of the two methods is correct.  Also, do we have to implement the friend function(friend std::istream & operator>>(std::istream &is, Card &card);)?",
+    "answer": "Yes, you can access enum values directly for comparisons. Both methods are valid, but explicit comparisons are clearer. Implement the friend function if needed for input operations."
+  },
+  {
+    "question": "project_Suit Suit_next(Suit suit)  {   return static_cast<Suit>((suit + 2) % 4);  }  In this sample of code, I used static_cast to convert the integer answer of the operation to a suit/enum data type. If I don't use static_cast, then my function doesn't work. Is this because the enum data type of 'suit' is converted to an integer?",
+    "answer": "Yes, without `static_cast`, the integer result of the operation cannot be returned as an enum type, leading to a type mismatch."
+  },
+  {
+    "question": "project_Hi, I'm currently writing my Card.cpp and I'm not sure if I should put the operator overrides inside the private/ public/ or entirely outside of the card class. In Card.hpp I saw that there was a copy of the >> operator in private written as a friend function as an example (?) of a possible configuration so I did that with my functions in Card.cpp? I'm not sure if I'm on the right track with that",
+    "answer": "Yes, you should declare operator overloads as friend functions in the class (if they need access to private members) and define them outside the class in `Card.cpp`. They should be public for user access."
+  },
+  {
+    "question": "project_working on the human player and have found the excerpt on always ensuring the hand of a human player is sorted. is this also applicable to the simple player? if not, is it actively harmful to do so to the simple player (if the autograder would not accept sorted simple player hands as correct)? thanks!",
+    "answer": "No, sorting is not required for the simple player and could be harmful if it conflicts with the player's strategy or autograder expectations."
+  },
+  {
+    "question": "project_I am retaking this course but I am doing euchre with a different partner than last time, is it considered a violation of the Honor Code if I use parts of the code that I personally worked on within the euchre project last time for this time as well?",
+    "answer": "It is best to clarify with the instructor, but generally, reusing your own previously written code may be acceptable if not explicitly prohibited."
+  },
+  {
+    "question": "project_Do we get hints for finding bugs for our own player tests?",
+    "answer": "No, hints for finding bugs in your own player tests are not explicitly provided."
+  },
+  {
+    "question": "project_For player.cpp, are we expected to create derived classes for the simple player and the human player? If so, should we be modifying the player.hpp file?",
+    "answer": "Yes, create derived classes for Simple Player and Human Player in `Player.cpp`. Do not modify `Player.hpp`."
+  },
+  {
+    "question": "project_I was wondering if there is any way to see what cards each of the players have in their hand besides figuring it out from pack.in. Since there is no variable that stores the name or the hand in Player.hpp, the debugger can't show the name or the hand of any of the players and I was wondering how I can see/access those things in the debugger.",
+    "answer": "Modify the `Player` class to include a method that prints or returns the player's hand. Implement this method in `Player.cpp`, and call it during the game to see the hand in the console output while debugging."
+  },
+  {
+    "question": "project_For the functions in the player class, how do we implement them without any variables like name? are we supposed to create our own private member variables?  Also, do the declarations of the simple and human player classes go in the hpp file and implementations of the functions in the cpp file? Or does the declaration also go in the cpp file?",
+    "answer": "Yes, create private member variables in the Player class to store information like name. Declarations of Simple and Human Player classes go in the hpp file; implementations go in the cpp file."
+  },
+  {
+    "question": "project_I am confused as to what this part is asking to do. Am I supposed to make an invariants function?",
+    "answer": "Yes, you may need to implement a function to check invariants, ensuring the data structure maintains its properties."
+  },
+  {
+    "question": "project_Have I coded the function right? Essentially, if the pack is empty, then the next value is initialised to the index of the last card, plus one. So 23+1=24.    Code 1: bool Pack::empty() const  {   return (next == PACK_SIZE);  }",
+    "answer": "Yes, the function is coded correctly."
+  },
+  {
+    "question": "project_So for this part, the specs say this: \"If a Human Player is the dealer and someone orders up during the first round of making, the Human Player will pick up the upcard and discard a card of their choice. \". So are we suppose to check if the human player is dealer and those conditions in player.cpp or that is the euchre.cpp part?",
+    "answer": "Implement the check in `euchre.cpp`, as it manages game flow and player interactions."
+  },
+  {
+    "question": "project_I created a string private member variable for the player's name for the simple player class in player.cpp. When I'm running my public tests. I'm getting a segmentation fault 11. I'm not sure why since the parameters for the base class and the derived class are matching.  My latest submission is on the Autograder. Thank you!",
+    "answer": "Check the initialization of the base class in the derived class constructor, ensure proper memory management, and verify that the string member variable is initialized correctly. Use debugging tools to trace the source of the segmentation fault."
+  },
+  {
+    "question": "project_Not sure how to write the one that takes in the led card without copying code from the other.",
+    "answer": "Create a helper function for common logic, then call it from both the existing functions and the new one for the led card."
+  },
+  {
+    "question": "project_hey! i'm wrapping up the logic of euchre.cpp and am writing tests to ensure all components are working to help locate bugs. in submitting to the autograder i've found both that my pack's public tests seem to be failing despite working on my computer (WSL), and also that i am failing almost all of the UB checks with address sanitizer error output despite not encountering address sanitizer issues on my computer.  for pack: would it be helpful to run on caen?  for UB: would it help to place assert statements to check if the RME of a function is met?  any other advice would be appreciated. thanks!",
+    "answer": "Yes, running on CAEN can help with public test failures. Adding assert statements for RME checks is a good practice for UB. Ensure proper memory management and consider using Valgrind or AddressSanitizer for debugging."
+  },
+  {
+    "question": "project_Should the operator overloads take into account both suit and rank or just rank?    bool operator<(const Card &lhs, const Card &rhs);  bool operator>(const Card &lhs, const Card &rhs);",
+    "answer": "Both suit and rank should be taken into account; compare ranks first, then suits for ties."
+  },
+  {
+    "question": "project_How do I make sure in round 2 of making trump that the dealer makes trump if everyone else passes?",
+    "answer": "Implement the \"screw the dealer\" rule, forcing the dealer to order up a suit other than the upcard's suit if all players pass in round 1."
+  },
+  {
+    "question": "project_For the tests for cards.cpp, do we have to test every single function including the operator overloading functions?",
+    "answer": "Yes, it's recommended to test every public function, including operator overloading functions, to ensure correctness."
+  },
+  {
+    "question": "project_How do I empty each player's hand at the beginning of each round?",
+    "answer": "Call the `clear()` method on each player's hand (e.g., `player.hand.clear()`) at the beginning of each round."
+  },
+  {
+    "question": "project_Hi,  I made a few submits to the autograder today, and I made one submit shortly before the time the project was due. The most recent submission scored less on the public tests than the second-to-most recent submission. Will the most recent submission or the submission with the highest score on public tests be graded for my and my partner's final grade?  Thank you!",
+    "answer": "The submission with the highest score on public tests will be graded for your final grade."
+  },
+  {
+    "question": "project_For each hang of a game, do we reshuffle the cards, or keep it the way it is after the first time we shuffle it?",
+    "answer": "We reshuffle the cards for each hand."
+  }
+]
