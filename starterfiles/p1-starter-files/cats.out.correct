@@ -1,0 +1,32 @@
+reading column food from cats.csv
+reading column weight from cats.csv
+Group A: weight | food = 1
+count = 5
+sum = 52.3
+mean = 10.46
+stdev = 0.838451
+median = 10.1
+min = 9.6
+max = 11.5
+  0th percentile = 9.6
+ 25th percentile = 9.9
+ 50th percentile = 10.1
+ 75th percentile = 11.2
+100th percentile = 11.5
+
+Group B: weight | food = 2
+count = 5
+sum = 50.3
+mean = 10.06
+stdev = 1.70088
+median = 10.1
+min = 7.8
+max = 12.3
+  0th percentile = 7.8
+ 25th percentile = 9.2
+ 50th percentile = 10.1
+ 75th percentile = 10.9
+100th percentile = 12.3
+
+Confidence interval for mean(weight | A) - mean(weight | B):
+  95% [-0.28, 1.2005]

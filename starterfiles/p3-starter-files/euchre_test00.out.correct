@@ -1,0 +1,46 @@
+./euchre.exe pack.in noshuffle 1 Adi Simple Barbara Simple Chi-Chih Simple Dabbala Simple 
+Hand 0
+Adi deals
+Jack of Diamonds turned up
+Barbara passes
+Chi-Chih passes
+Dabbala passes
+Adi passes
+Barbara orders up Hearts
+
+Jack of Spades led by Barbara
+King of Spades played by Chi-Chih
+Ace of Spades played by Dabbala
+Nine of Diamonds played by Adi
+Dabbala takes the trick
+
+King of Clubs led by Dabbala
+Ace of Clubs played by Adi
+Nine of Spades played by Barbara
+Jack of Clubs played by Chi-Chih
+Adi takes the trick
+
+Ten of Diamonds led by Adi
+Ten of Spades played by Barbara
+Nine of Clubs played by Chi-Chih
+Queen of Clubs played by Dabbala
+Adi takes the trick
+
+Jack of Hearts led by Adi
+Ace of Hearts played by Barbara
+Ten of Clubs played by Chi-Chih
+Ten of Hearts played by Dabbala
+Adi takes the trick
+
+Queen of Hearts led by Adi
+King of Hearts played by Barbara
+Queen of Spades played by Chi-Chih
+Nine of Hearts played by Dabbala
+Barbara takes the trick
+
+Adi and Chi-Chih win the hand
+euchred!
+Adi and Chi-Chih have 2 points
+Barbara and Dabbala have 0 points
+
+Adi and Chi-Chih win!
