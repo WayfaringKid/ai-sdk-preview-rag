@@ -8,16 +8,12 @@ load_dotenv()
 openai.api_key = ""
 
 # Paths
-markdown_dir = os.path.join(os.path.dirname(__file__), '..', 'projectspecs')
-query_file_path = os.path.join(os.path.dirname(__file__), '..', 'discussionthreads', 'sp24_parsed.json')
+markdown_dir = os.path.join(os.path.dirname(__file__), '..', 'projectspecs', 'p3_euchre.md')
+query_file_path = os.path.join(os.path.dirname(__file__), '..', 'discussionthreads', 'sp24_project3_plaintext_parsed.json')
 
-# Load project spec docs
-docs = []
-for filename in os.listdir(markdown_dir):
-    if filename.endswith(".md"):
-        with open(os.path.join(markdown_dir, filename), 'r', encoding='utf-8') as f:
-            docs.append(f.read())
-docs_context = "\n\n".join(docs)
+# Load the project spec doc
+with open(markdown_dir, 'r', encoding='utf-8') as f:
+    docs_context = f.read()
 
 # Load queries from JSON
 try:
