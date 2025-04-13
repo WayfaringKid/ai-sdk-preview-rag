@@ -15,10 +15,27 @@ def main():
     with open(markdown_dir, 'r', encoding='utf-8') as f:
         content = f.read()
         docs.append(content)
-    print("=== Docs loaded from 'projectspecs' ===")
+    
+    # Load all starter files and add to docs
+    starter_dir = os.path.join(os.path.dirname(__file__), '..', 'starterfiles', 'p3-starter-files-USE-THESE')
+
+    for root, _, files in os.walk(starter_dir):
+        for filename in files:
+            file_path = os.path.join(root, filename)
+            try:
+                with open(file_path, 'r', encoding='utf-8') as f:
+                    content = f.read()
+                    relative_path = os.path.relpath(file_path, starter_dir)
+                    labeled_content = f"===== FILE: {relative_path} =====\n{content}"
+                    docs.append(labeled_content)
+            except Exception as e:
+                print(f"[WARNING] Could not read {file_path}: {e}")
+    
+    print("=== Docs loaded from 'projectspecs' and 'starterfiles' ===")
     for i, doc in enumerate(docs):
         snippet = doc[:100].replace("\n", "\\n")
         print(f"Doc[{i}] {snippet}...")
+
 
     save_dir = 'outputs'
     llm_model_name = 'gpt-4o-mini'
@@ -33,7 +50,7 @@ def main():
     hipporag.index(docs=docs)
 
     queries = []
-    json_query_file = os.path.join(query_dir, "sp24_project3_plaintext_parsed.json")
+    json_query_file = os.path.join(query_dir, "w25_project3_plaintext_parsed.json")
     if os.path.isfile(json_query_file):
         with open(json_query_file, "r", encoding="utf-8") as f:
             data = json.load(f) 
@@ -44,7 +61,7 @@ def main():
     else:
         print(f"[WARNING] JSON file not found: {json_query_file}")
 
-    print("=== Queries loaded from 'sp24_parsed.json' ===")
+    print("=== Queries loaded from 'w25_parsed.json' ===")
     for i, q in enumerate(queries):
         snippet = q.replace("\n", "\\n")
         print(f"Q[{i}]: {snippet}")

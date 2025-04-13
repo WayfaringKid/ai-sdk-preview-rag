@@ -9,11 +9,26 @@ openai.api_key = ""
 
 # Paths
 markdown_dir = os.path.join(os.path.dirname(__file__), '..', 'projectspecs', 'p3_euchre.md')
-query_file_path = os.path.join(os.path.dirname(__file__), '..', 'discussionthreads', 'sp24_project3_plaintext_parsed.json')
+query_file_path = os.path.join(os.path.dirname(__file__), '..', 'discussionthreads', 'w25_project3_plaintext_parsed.json')
 
 # Load the project spec doc
 with open(markdown_dir, 'r', encoding='utf-8') as f:
     docs_context = f.read()
+
+# Load starter files
+starter_dir = os.path.join(os.path.dirname(__file__), '..', 'starterfiles', 'p3-starter-files-USE-THESE')
+starter_context = ""
+
+for root, _, files in os.walk(starter_dir):
+    for filename in files:
+        file_path = os.path.join(root, filename)
+        try:
+            with open(file_path, 'r', encoding='utf-8') as f:
+                content = f.read()
+                relative_path = os.path.relpath(file_path, starter_dir)
+                starter_context += f"\n\n===== FILE: {relative_path} =====\n{content}"
+        except Exception as e:
+            print(f"⚠️ Skipped {file_path}: {e}")
 
 # Load queries from JSON
 try:
@@ -35,11 +50,12 @@ conversation = [
     {
         "role": "system",
         "content": "You are an Instructional Aide (IA) for EECS 280 at the University of Michigan. "
-                   "You will help students by answering questions based on the project specs."
+                   "You will help students by answering questions based on the project specs and starter files."
     },
     {
         "role": "user",
-        "content": f"Here are the project specs from EECS 280:\n\n{docs_context}"
+        "content": f"Here are the project specs from EECS 280:\n\n{docs_context}\n\n"
+                f"And here are the starter files:\n{starter_context}"
     }
 ]
 
@@ -79,4 +95,3 @@ try:
     print(f"\n✅ All answers saved to: {output_path}")
 except Exception as e:
     print(f"❌ Failed to save answers: {e}")
-
